@@ -1,14 +1,23 @@
 import express from 'express'
+import cors from 'cors'
 import db from './config/database.js'
 import { Activity, Leaderboard, Team, User, Workout } from './models/index.js'
 import { createResourceRouter } from './routes/resourceRouter.js'
 
 const app = express()
 const port = Number(process.env.PORT || 8000)
-const apiBaseUrl = process.env.CODESPACE_NAME
-  ? `https://${process.env.CODESPACE_NAME}-8000.app.github.dev`
+const codespaceName = process.env.CODESPACE_NAME
+const apiBaseUrl = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev`
   : `http://localhost:${port}`
+const allowedOrigins = new Set([
+  'http://localhost:5173',
+  ...(codespaceName ? [`https://${codespaceName}-5173.app.github.dev`] : []),
+])
 
+app.use(cors({
+  origin: (origin, callback) => callback(null, !origin || allowedOrigins.has(origin)),
+}))
 app.use(express.json())
 
 const apiRouter = express.Router()
@@ -22,6 +31,7 @@ apiRouter.get('/health', (_request, response) => {
 })
 
 apiRouter.use('/users', createResourceRouter(User))
+apiRouter.use('/user', createResourceRouter(User))
 apiRouter.use('/teams', createResourceRouter(Team))
 apiRouter.use('/activities', createResourceRouter(Activity))
 apiRouter.use('/leaderboard', createResourceRouter(Leaderboard, { points: -1 }))

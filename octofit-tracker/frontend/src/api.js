@@ -2,9 +2,27 @@ const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim()
 const apiBaseUrl = codespaceName
   ? `https://${codespaceName}-8000.app.github.dev/api`
   : 'http://localhost:8000/api'
+const resourceUrls = {
+  activities: codespaceName
+    ? `https://${codespaceName}-8000.app.github.dev/api/activities/`
+    : `${apiBaseUrl}/activities/`,
+  leaderboard: codespaceName
+    ? `https://${codespaceName}-8000.app.github.dev/api/leaderboard/`
+    : `${apiBaseUrl}/leaderboard/`,
+  teams: codespaceName
+    ? `https://${codespaceName}-8000.app.github.dev/api/teams/`
+    : `${apiBaseUrl}/teams/`,
+  users: codespaceName
+    ? `https://${codespaceName}-8000.app.github.dev/api/users/`
+    : `${apiBaseUrl}/users/`,
+  workouts: codespaceName
+    ? `https://${codespaceName}-8000.app.github.dev/api/workouts/`
+    : `${apiBaseUrl}/workouts/`,
+}
 
 export function getApiUrl(resource) {
-  return `${apiBaseUrl}/${resource.replace(/^\/+|\/+$/g, '')}/`
+  const normalizedResource = resource.replace(/^\/+|\/+$/g, '')
+  return resourceUrls[normalizedResource] || `${apiBaseUrl}/${normalizedResource}/`
 }
 
 function extractRecords(payload) {
