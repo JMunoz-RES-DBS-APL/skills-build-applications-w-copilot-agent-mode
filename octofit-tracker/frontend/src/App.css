@@ -1,0 +1,41 @@
+.app-shell {
+  background: #f4f6f2;
+}
+
+.brand {
+  color: #20392e;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.brand img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.nav-pills {
+  gap: 0.25rem;
+}
+
+.nav-pills .nav-link {
+  color: #4a5b50;
+  white-space: nowrap;
+}
+
+.nav-pills .nav-link.active {
+  color: #fff;
+  background: #28654a;
+}
+
+.section-kicker {
+  color: #bd573a;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.section-title {
+  color: #20392e;
+  font-family: Georgia, serif;
+  font-size: 2.5rem;
+}
