@@ -1,5 +1,6 @@
 import { useCollection } from '../hooks/useCollection.js'
-import { CollectionContent, formatDate, PageHeading, referenceLabel } from './shared.jsx'
+import { formatDate, referenceLabel } from './formatters.js'
+import { CollectionContent, PageHeading } from './shared.jsx'
 
 function Activities() {
   const { records, isLoading, error, retry } = useCollection('activities')

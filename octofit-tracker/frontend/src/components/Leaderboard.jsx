@@ -1,5 +1,6 @@
 import { useCollection } from '../hooks/useCollection.js'
-import { CollectionContent, PageHeading, referenceLabel } from './shared.jsx'
+import { referenceLabel } from './formatters.js'
+import { CollectionContent, PageHeading } from './shared.jsx'
 
 function Leaderboard() {
   const { records, isLoading, error, retry } = useCollection('leaderboard')
